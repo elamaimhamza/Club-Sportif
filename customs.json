@@ -1,0 +1,22 @@
+{
+    "elements": {},
+    "attributes": {
+        "th:text": {
+            "context": "h2"
+        },
+        "th:action": {},
+        "th:replace": {},
+        "th:href": {
+            "context": "a"
+        },
+        "th:field": {
+            "context": "input"
+        },
+        "th:each": {
+            "context": "option"
+        },
+        "th:fragment": {
+            "context": "nav"
+        }
+    }
+}

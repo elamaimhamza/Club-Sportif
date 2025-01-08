@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestion des Membres</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div th:replace="fragments/navigation :: nav"></div>
+    <div class="container mt-4">
+        <h2>Liste des Membres</h2>
+        <a href="/membres/new" class="btn btn-primary mb-3">Nouveau Membre</a>
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="membre : ${membres}">
+                    <td th:text="${membre.idMembre}"></td>
+                    <td th:text="${membre.nom}"></td>
+                    <td th:text="${membre.prenom}"></td>
+                    <td th:text="${membre.email}"></td>
+                    <td th:text="${membre.statut}"></td>
+                    <td>
+                        <a th:href="@{/membres/edit/{id}(id=${membre.idMembre})}" class="btn btn-warning btn-sm">Modifier</a>
+                        <a th:href="@{/membres/delete/{id}(id=${membre.idMembre})}" class="btn btn-danger btn-sm" 
+                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce membre ?')">Supprimer</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

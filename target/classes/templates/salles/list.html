@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestion des Salles</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div th:replace="fragments/navigation :: nav"></div>
+    <div class="container mt-4">
+        <h2>Liste des Salles</h2>
+        <a href="/salles/new" class="btn btn-primary mb-3">Nouvelle Salle</a>
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Capacité</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="salle : ${salles}">
+                    <td th:text="${salle.idSalle}"></td>
+                    <td th:text="${salle.nom}"></td>
+                    <td th:text="${salle.capacite}"></td>
+                    <td>
+                        <a th:href="@{/salles/edit/{id}(id=${salle.idSalle})}" class="btn btn-warning btn-sm">Modifier</a>
+                        <a th:href="@{/salles/delete/{id}(id=${salle.idSalle})}" class="btn btn-danger btn-sm"
+                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette salle ?')">Supprimer</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

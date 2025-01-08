@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestion des Inscriptions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div th:replace="fragments/navigation :: nav"></div>
+    
+    <div class="container mt-4">
+        <h2>Liste des Inscriptions</h2>
+        <a href="/inscriptions/new" class="btn btn-primary mb-3">Nouvelle Inscription</a>
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Membre</th>
+                    <th>Seance</th>
+                    <th>Date d'Inscription</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="inscription : ${inscriptions}">
+                    <td th:text="${inscription.membre.nom}"></td>
+                    <td th:text="${#temporals.format(inscription.seance.date, 'dd/MM/yyyy')} + ' - ' + inscription.seance.heure"></td>
+                    <td th:text="${#temporals.format(inscription.dateInscription, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td>
+                        <a th:href="@{/inscriptions/delete/{id}(id=${inscription.id})}" class="btn btn-danger btn-sm"
+                           onclick="return confirm('Êtes-vous sûr de vouloir annuler cette inscription ?')">Annuler</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

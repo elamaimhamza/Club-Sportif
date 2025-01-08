@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulaire Membre</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+     <div th:replace="fragments/navigation :: nav"></div>
+    <div class="container mt-4">
+        <h2 th:text="${membre.idMembre == null ? 'Nouveau Membre' : 'Modifier Membre'}"></h2>
+        
+        <form th:action="@{/membres}" th:object="${membre}" method="post">
+            <input type="hidden" th:field="*{idMembre}" />
+            
+            <div class="mb-3">
+                <label for="nom" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="nom" th:field="*{nom}" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="prenom" class="form-label">Prénom</label>
+                <input type="text" class="form-control" id="prenom" th:field="*{prenom}" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="statut" class="form-label">Statut</label>
+                <select class="form-control" id="statut" th:field="*{statut}">
+                    <option th:each="statutOption : ${T(com.example.gym.model.Statut).values()}"
+                            th:value="${statutOption}" th:text="${statutOption}"></option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <a href="/membres" class="btn btn-secondary">Annuler</a>
+        </form>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
